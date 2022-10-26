@@ -1,46 +1,42 @@
 <template>
-
-  <v-container fill-height style="max-width: 1000px">
+  <v-container style="max-width: 300px" fill-height>
     <v-row>
-      <v-col cols="0" sm="6">
-        <v-img contain height="100%" :src="require('../assets/skull.png')"></v-img>
-      </v-col>
-      <v-col cols="12" sm="6">
-        <v-img contain height="100%" src="https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp">
-          <v-container fill-height fluid>
-            <v-row no-gutters class="fill-height">
-              <v-col cols="10" align-self="end">
-                <v-btn class="mx-1 grey darken-3 white--text">BLACK</v-btn>
-                <v-btn class="mx-1 grey white--text">GREY</v-btn>
-                <v-btn class="mx-1 pink lighten-2 white--text">PINK</v-btn>
-              </v-col>
-              <v-col cols="2" align-self="end">
-                <v-spacer />
-                <v-btn>BUY</v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-img>
-        
-      </v-col>
-    </v-row>
-    
-    <v-row v-if="false" class="fill-height">
-      <v-col>
       <v-card elevation="0">
-        <v-card-title>Shopping Cart</v-card-title>
         <v-card-text>
-          <v-data-table :headers="headers" :items="desserts" hide-default-footer></v-data-table>
+          <v-img contain max-height="300px" :src="products[display].img"></v-img>
+
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="py-4">
+          <v-btn @click="display = 0" color="grey darken-4 white--text" small>BLACK</v-btn>
+          <v-btn @click="display = 1" color="grey white--text" small>GREY</v-btn>
+          <v-btn @click="display = 2" color="pink lighten-3 white--text" small>PINK</v-btn>
           <v-spacer />
-          <v-btn small>BUY</v-btn>
+          <v-btn @click="addCart" small>ADD</v-btn>
         </v-card-actions>
       </v-card>
-    </v-col>
+      <v-simple-table dense style="width: 100%">
+        <thead>
+          <tr>
+            <th class="text-left">
+              Description
+            </th>
+            <th class="text-center">
+              Quantity
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="product in cart" :key="product.img">
+            <td>{{ product.color }}</td>
+            <td class="text-center">
+              <input v-model="product.qty" min="1" max="5" type="number" />
+            </td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+      <v-btn class="my-2" text dense block>CHECKOUT</v-btn>
     </v-row>
   </v-container>
-
 </template>
 
 <script>
@@ -49,109 +45,43 @@
     name: 'HomeView',
     data() {
       return {
-      desserts: [
+        display: 0,
+        headers: [
           {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%',
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%',
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%',
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%',
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%',
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%',
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%',
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%',
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%',
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%',
-          },
+            text: "color",
+            value: "value"
+          }
         ],
-    }
-  },
-  computed: {
-      headers () {
-        return [
+        products: [
           {
-            text: 'Dessert (100g serving)',
-            align: 'start',
-            sortable: false,
-            value: 'name',
+            color: "black",
+            img: "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
+            qty: 1
           },
           {
-            text: 'Calories',
-            value: 'calories',
+            color: "grey",
+            img: "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
+            qty: 1
           },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
-        ]
+          {
+            color: "pink",
+            img: "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
+            qty: 1
+          }
+        ],
+        cart: []
+      }
+    },
+    computed: {
+      productImage() {
+        return this.products[this.display].img
       },
+    },
+    methods: {
+      addCart() {
+        if (!this.cart.includes(this.products[this.display]))
+          this.cart.push(this.products[this.display])
+      }
     }
   }
 </script>
