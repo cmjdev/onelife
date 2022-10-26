@@ -1,15 +1,11 @@
 <template>
-  
+
   <v-container style="max-width: 300px" fill-height>
-    <stripe-checkout
-      ref="checkoutRef"
-      mode="payment"
+    <stripe-checkout ref="checkoutRef" mode="payment"
       pk="pk_test_51LugSHJlyGrOuzyMyptZ0505rGbH8W4RJ5LlBOnBApQc1t4wvjCF9a2dOLruM2rePCjp8AQw9OwG1dwq3Do74HRU00C2kPGc46"
-      :line-items="lineItems"
-      success-url="https://www.onelifedrift.club"
-      cancel-url="https://www.onelifedrift.club"
-      @loading="v => loading = v"
-    />
+      :line-items="lineItems" :shippingAddressCollection="{allowedCountries: ['US', 'CA']}"
+      success-url="https://www.onelifedrift.club" cancel-url="https://www.onelifedrift.club"
+      @loading="v => loading = v" />
     <!-- <stripe-checkout
       ref="checkoutRef"
       pk="pk_test_51LugSHJlyGrOuzyMyptZ0505rGbH8W4RJ5LlBOnBApQc1t4wvjCF9a2dOLruM2rePCjp8AQw9OwG1dwq3Do74HRU00C2kPGc46"
@@ -20,11 +16,7 @@
         <v-card-text>
           <!-- <v-img contain max-height="300px" :src="products[display].img"></v-img> -->
           <v-carousel hide-delimiters height="320px">
-            <v-carousel-item
-              v-for="(img,i) in images"
-              :key="i"
-              :src="img"
-            ></v-carousel-item>
+            <v-carousel-item v-for="(img,i) in images" :key="i" :src="img"></v-carousel-item>
           </v-carousel>
         </v-card-text>
         <v-card-actions class="py-4">
@@ -51,7 +43,9 @@
             <td>{{ product.color }}</td>
             <td class="text-right">
               <input style="text-align:center" v-model="product.qty" min="1" max="5" type="number" />
-              <v-btn @click="removeCart(i)" x-small icon><v-icon small>mdi-close</v-icon></v-btn>
+              <v-btn @click="removeCart(i)" x-small icon>
+                <v-icon small>mdi-close</v-icon>
+              </v-btn>
             </td>
           </tr>
         </tbody>
@@ -62,44 +56,29 @@
 </template>
 
 <script>
-import { StripeCheckout } from '@vue-stripe/vue-stripe';
+  import { StripeCheckout } from '@vue-stripe/vue-stripe';
   export default {
     components: {
-    StripeCheckout,
-  },
+      StripeCheckout,
+    },
     name: 'HomeView',
     data() {
       return {
         loading: false,
         lineItems: [
-        {
-          price: 'price_1Lv0nqJlyGrOuzyM3bPMpaef', // The id of the one-time price you created in your Stripe dashboard
-          adjustable_quantity: {
-        enabled: true,
-        minimum: 1,
-        maximum: 10,
-      },
-          quantity: 1,
-        },
-        {
-          price: 'price_1LxFDoJlyGrOuzyM6m9HOaBm', // The id of the one-time price you created in your Stripe dashboard
-          adjustable_quantity: {
-        enabled: true,
-        minimum: 1,
-        maximum: 10,
-      },
-          quantity: 3,
-        },
-        {
-          price: 'price_1LxFDKJlyGrOuzyMo1saczit', // The id of the one-time price you created in your Stripe dashboard
-          adjustable_quantity: {
-        enabled: true,
-        minimum: 1,
-        maximum: 10,
-      },
-          quantity: 2,
-        },
-      ],
+          {
+            price: 'price_1Lv0nqJlyGrOuzyM3bPMpaef', // The id of the one-time price you created in your Stripe dashboard
+            quantity: 1,
+          },
+          {
+            price: 'price_1LxFDoJlyGrOuzyM6m9HOaBm', // The id of the one-time price you created in your Stripe dashboard
+            quantity: 3,
+          },
+          {
+            price: 'price_1LxFDKJlyGrOuzyMo1saczit', // The id of the one-time price you created in your Stripe dashboard
+            quantity: 2,
+          },
+        ],
         display: 0,
         headers: [
           {
@@ -111,30 +90,33 @@ import { StripeCheckout } from '@vue-stripe/vue-stripe';
           {
             color: "black",
             imgs: ["https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp"],
-            qty: 1
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp"],
+            qty: 1,
+            price: 'price_1LxFDoJlyGrOuzyM6m9HOaBm'
           },
           {
             color: "grey",
             imgs: ["https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-          ],
-            qty: 1
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
+            ],
+            qty: 1,
+            price: "price_1Lv0nqJlyGrOuzyM3bPMpaef"
           },
           {
             color: "pink",
             imgs: ["https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
-            "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp"],
-            qty: 1
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
+              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp"],
+            qty: 1,
+            price: "price_1LxFDKJlyGrOuzyMo1saczit"
           }
         ],
         cart: []
@@ -157,10 +139,40 @@ import { StripeCheckout } from '@vue-stripe/vue-stripe';
         this.cart[index].qty = 1
         this.cart.splice(index, 1)
       },
-      checkout () {
-      // You will be redirected to Stripe's secure checkout page
-      this.$refs.checkoutRef.redirectToCheckout();
-    },
+      checkout() {
+        // You will be redirected to Stripe's secure checkout page
+        // this.$refs.checkoutRef.redirectToCheckout();
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer rk_test_51LugSHJlyGrOuzyMFqTc84zqLmxQuao2EhirUwukl0pKosNZSI7OihIGGpV0dQHm8GpF9YgpnwpO6UUZgdMtdklV00TX1AriHa");
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("success_url", "https://example.com/success");
+        urlencoded.append("cancel_url", "https://example.com/cancel");
+
+        this.cart.forEach((element, i) => {
+          urlencoded.append(`line_items[${i}][price]`, element.price);
+          urlencoded.append(`line_items[${i}][quantity]`, element.qty);
+        });
+
+        // urlencoded.append("line_items[0][price]", "price_1LxFDKJlyGrOuzyMo1saczit");
+        // urlencoded.append("line_items[0][quantity]", "2");
+        urlencoded.append("mode", "payment");
+        urlencoded.append("allow_promotion_codes", "true");
+        urlencoded.append("shipping_address_collection[allowed_countries][0]", "US");
+
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: 'follow'
+        };
+
+        fetch("https://api.stripe.com/v1/checkout/sessions", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+      },
     }
   }
 </script>
