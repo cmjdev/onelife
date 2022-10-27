@@ -216,8 +216,8 @@
         };
 
         fetch("https://api.stripe.com/v1/checkout/sessions", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
+          .then(response => response.json())
+          .then(result => window.open(result.url, "_top"))
           .catch(error => console.log('error', error));
       },
     }
