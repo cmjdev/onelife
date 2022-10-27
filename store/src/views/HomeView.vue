@@ -1,20 +1,67 @@
 <template>
 
-  <v-container style="max-width: 300px" fill-height>
+  <div style="display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;">
+    <v-card elevation="0" class="my-auto" max-width="400px">
+      <v-card-text>
+        <v-carousel hide-delimiters height="300">
+          <v-carousel-item v-for="(img,i) in images" :key="i">
+            <v-img :src="img" contain max-height="300"></v-img>
+          </v-carousel-item>
+        </v-carousel>
+      </v-card-text>
+      <v-card-actions class="px-8">
+        <v-btn @click="display = 0" color="grey darken-4 white--text" small>BLACK</v-btn>
+        <v-btn @click="display = 1" color="grey white--text" small>GREY</v-btn>
+        <v-btn @click="display = 2" color="pink lighten-3 white--text" small>PINK</v-btn>
+        <v-spacer />
+        <v-btn @click="addCart" small>ADD</v-btn>
+      </v-card-actions>
+      <div v-if="cart.length > 0">
+      <v-simple-table dense style="width: 100%" class="px-4">
+        <thead>
+          <tr>
+            <th class="text-left">
+              Description
+            </th>
+            <th class="text-right">
+              Quantity
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(product,i) in cart" :key="i">
+            <td>{{ product.color }}</td>
+            <td class="text-right">
+              <input style="text-align:center" v-model="product.qty" min="1" max="5" type="number" />
+              <v-btn @click="removeCart(i)" x-small icon>
+                <v-icon small>mdi-close</v-icon>
+              </v-btn>
+            </td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+      <v-btn @click="checkout" class="my-2" text dense block>CHECKOUT</v-btn>
+    </div>
+    </v-card>
     <stripe-checkout ref="checkoutRef" mode="payment"
       pk="pk_test_51LugSHJlyGrOuzyMyptZ0505rGbH8W4RJ5LlBOnBApQc1t4wvjCF9a2dOLruM2rePCjp8AQw9OwG1dwq3Do74HRU00C2kPGc46"
       :line-items="lineItems" :shippingAddressCollection="{allowedCountries: ['US', 'CA']}"
       success-url="https://www.onelifedrift.club" cancel-url="https://www.onelifedrift.club"
       @loading="v => loading = v" />
-    <!-- <stripe-checkout
-      ref="checkoutRef"
+  </div>
+
+  <!-- <v-container style="max-width: 300px" fill-height>
+    <stripe-checkout ref="checkoutRef" mode="payment"
       pk="pk_test_51LugSHJlyGrOuzyMyptZ0505rGbH8W4RJ5LlBOnBApQc1t4wvjCF9a2dOLruM2rePCjp8AQw9OwG1dwq3Do74HRU00C2kPGc46"
-      session-id="sessionId"
-    /> -->
+      :line-items="lineItems" :shippingAddressCollection="{allowedCountries: ['US', 'CA']}"
+      success-url="https://www.onelifedrift.club" cancel-url="https://www.onelifedrift.club"
+      @loading="v => loading = v" />
     <v-row>
       <v-card elevation="0">
         <v-card-text>
-          <!-- <v-img contain max-height="300px" :src="products[display].img"></v-img> -->
           <v-carousel hide-delimiters height="320px">
             <v-carousel-item v-for="(img,i) in images" :key="i" :src="img"></v-carousel-item>
           </v-carousel>
@@ -52,7 +99,7 @@
       </v-simple-table>
       <v-btn @click="checkout" class="my-2" text dense block>CHECKOUT</v-btn>
     </v-row>
-  </v-container>
+  </v-container> -->
 </template>
 
 <script>
