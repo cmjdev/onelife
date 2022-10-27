@@ -12,15 +12,17 @@
           </v-carousel-item>
         </v-carousel>
       </v-card-text>
-      <v-card-actions class="px-8">
+      <v-card-actions>
+        <v-row justify="center" align="center">
         <v-btn @click="display = 0" color="grey darken-4 white--text" small>BLACK</v-btn>
-        <v-btn @click="display = 1" color="grey white--text" small>GREY</v-btn>
+        <v-btn @click="display = 1" color="grey mx-2 white--text" small>GREY</v-btn>
         <v-btn @click="display = 2" color="pink lighten-3 white--text" small>PINK</v-btn>
-        <v-spacer />
+        <v-btn disabled text small>$20</v-btn>
         <v-btn @click="addCart" small>ADD</v-btn>
+      </v-row >
       </v-card-actions>
       <div v-if="cart.length > 0">
-      <v-simple-table dense style="width: 100%" class="px-4">
+      <v-simple-table dense style="width: 100%" class="pa-4">
         <thead>
           <tr>
             <th class="text-left">
