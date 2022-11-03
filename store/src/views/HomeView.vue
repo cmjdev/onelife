@@ -8,7 +8,7 @@
       <v-card-text>
         <v-carousel hide-delimiters height="300">
           <v-carousel-item v-for="(img,i) in images" :key="i">
-            <v-img :src="img" contain max-height="300"></v-img>
+            <v-img style="filter: drop-shadow(5px 5px 5px #666666);" :src="img" contain max-height="300"></v-img>
           </v-carousel-item>
         </v-carousel>
       </v-card-text>
@@ -38,7 +38,7 @@
             <td>{{ product.color }}</td>
             <td class="text-right">
               <input style="text-align:center" v-model="product.qty" min="1" max="5" type="number" />
-              <v-btn @click="removeCart(i)" x-small icon>
+              <v-btn right @click="removeCart(i)" x-small icon>
                 <v-icon small>mdi-close</v-icon>
               </v-btn>
             </td>
@@ -138,32 +138,32 @@
         products: [
           {
             color: "black",
-            imgs: ["https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_51.webp"],
+            imgs: ["black.png",
+              "ff_final.png",
+              "ol.png",
+              "ol2.png",
+              "FINAL.png"],
             qty: 1,
             price: 'price_1LxFDoJlyGrOuzyM6m9HOaBm'
           },
           {
             color: "grey",
-            imgs: ["https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_70.webp",
+            imgs: ["grey.png",
+              "ff_final.png",
+              "ol.png",
+              "ol2.png",
+              "FINAL.png",
             ],
             qty: 1,
             price: "price_1Lv0nqJlyGrOuzyM3bPMpaef"
           },
           {
             color: "pink",
-            imgs: ["https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp",
-              "https://cdn.blankstyle.com/files/imagecache/product/p_images/8184/1501_01.webp"],
+            imgs: ["pink.png",
+              "ff_final.png",
+              "ol.png",
+              "ol2.png",
+              "FINAL.png"],
             qty: 1,
             price: "price_1LxFDKJlyGrOuzyMo1saczit"
           }
