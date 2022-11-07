@@ -8,7 +8,7 @@
       <v-card-text>
         <v-carousel hide-delimiters height="300">
           <v-carousel-item v-for="(img,i) in images" :key="i">
-            <v-img style="filter: drop-shadow(5px 5px 5px #666666);" :src="img" contain max-height="300"></v-img>
+            <v-img :src="img" contain max-height="300"></v-img>
           </v-carousel-item>
         </v-carousel>
       </v-card-text>
@@ -139,7 +139,8 @@
           {
             color: "black",
             imgs: ["black.png",
-              "ff_final.png",
+            "stickers.png",  
+            "ff_final.png",
               "ol.png",
               "ol2.png",
               "FINAL.png"],
@@ -149,7 +150,8 @@
           {
             color: "grey",
             imgs: ["grey.png",
-              "ff_final.png",
+            "stickers.png",  
+            "ff_final.png",
               "ol.png",
               "ol2.png",
               "FINAL.png",
@@ -160,7 +162,8 @@
           {
             color: "pink",
             imgs: ["pink.png",
-              "ff_final.png",
+            "stickers.png",  
+            "ff_final.png",
               "ol.png",
               "ol2.png",
               "FINAL.png"],
